@@ -32,14 +32,18 @@ temp = []
 plotSin = [(math.sin(rangeMap(i, 0, size, 0, math.pi*2))+1)/2 for i in range(size)]
 plotCos = [(math.cos(rangeMap(i, 0, size, 0, math.pi*2))+1)/2 for i in range(size)]
 plotSin_2 = [(math.sin(rangeMap(i, 0, size, 0, math.pi*2))**2+1)/2 for i in range(size)]
+line = [rangeMap(i, 0, size, 0, 1) for i in range(size)]
+x_2 = [rangeMap(rangeMap(i, 0, size, -2, 2)**2, 0, 4, 0, 1) for i in range(size)]
 
-learnCounts = 300
+learnCounts = 200
 for c in range(learnCounts):
     print("Processing:",100*c/learnCounts,"%")
     
-    Net.backProp(plotSin_2, plotSin_2)
+    #Net.backProp(plotSin_2, plotSin_2)
     Net.backProp(plotCos, plotCos)
     Net.backProp(plotSin, plotSin)
+    #Net.backProp(line, line)
+    #Net.backProp(x_2, x_2)
     
     temp.append(Net.forward(plotSin))
 
@@ -57,8 +61,12 @@ print("3D Sine...")
 plt.show()
 
 print("All functions...")
+#plt.plot(plotSin); plt.plot(Net.forward(plotSin))
+#plt.plot(plotCos); plt.plot(Net.forward(plotCos))
+#plt.plot(plotSin_2); plt.plot(Net.forward(plotSin_2))
 plt.plot(plotSin); plt.plot(Net.forward(plotSin))
 plt.plot(plotCos); plt.plot(Net.forward(plotCos))
-plt.plot(plotSin_2); plt.plot(Net.forward(plotSin_2))
+plt.plot(line); plt.plot(Net.forward(line))
+
 
 plt.show()
